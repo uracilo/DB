@@ -1,0 +1,20 @@
+version: "3.5"
+services:
+  mongo:
+    container_name: mongo_db
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    networks:
+      - utm_db
+  mongo_seed:
+    container_name: mongo_seed
+    build: nosql/.
+    networks:
+      - utm_db
+    depends_on:
+      - mongo
+networks:
+  utm_db:
+    name: utm_db
+    driver: bridge
